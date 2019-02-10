@@ -8,6 +8,7 @@ When you launch the program you get a command interface where you can execute a 
 1. help.
 2. total twitter users.
 3. users that link to most other users.
+4. most mentioned users.
 
 ## How to use it
 
@@ -79,7 +80,12 @@ If you are using Windows it is recommended to run the program with the [Git Bash
    ```bash
    $ users that link to most other users
    ```
+   
+11. Who is are the most mentioned Twitter users? (Provide the top five.)
 
+   ```bash
+   $ most mentioned users
+   ```
 
 ### My systems responses to the following questions:
 1. How many Twitter users are in the database?
@@ -106,7 +112,11 @@ If you are using Windows it is recommended to run the program with the [Git Bash
 3. Who is are the most mentioned Twitter users? (Provide the top five.)
   
    ```
-   TBD
+   Username: mileycyrus Mentions: 4147
+   Username: tommcfly Mentions: 3732
+   Username: ddlovato Mentions: 3163
+   Username: Jonasbrothers Mentions: 1218
+   Username: DavidArchie Mentions: 1184
    ```
    
 4. Who are the most active Twitter users (top ten)?
