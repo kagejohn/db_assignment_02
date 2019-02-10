@@ -6,6 +6,7 @@ using MongoDB.Bson;
 using MongoDB.Bson.IO;
 using MongoDB.Bson.Serialization;
 using MongoDB.Driver;
+using MongoDB.Driver.Linq;
 using MoreLinq;
 
 namespace Assignment_2_DB
@@ -47,6 +48,7 @@ namespace Assignment_2_DB
             //    }
             //}
 
+            Console.WriteLine("Loading data plz wait...");
             await LoadCollection();
 
             Console.WriteLine("Input a command: ");
@@ -65,13 +67,13 @@ namespace Assignment_2_DB
                     Console.WriteLine(UniqueUsers());
                 }
 
-                //if (input.ToLower() == "users that link to most other users")
-                //{
-                //    foreach (string name in UsersThatLinkToMost())
-                //    {
-                //        Console.WriteLine("Username: " + name);
-                //    }
-                //}
+                if (input.ToLower() == "users that link to most other users")
+                {
+                    foreach (KeyValuePair<string, int> keyValuePair in UsersThatLinkToMost())
+                    {
+                        Console.WriteLine("Username: " + keyValuePair.Key + " ReTweets: " + keyValuePair.Value);
+                    }
+                }
             }
         }
 
@@ -102,9 +104,32 @@ namespace Assignment_2_DB
         }
 
         //Which Twitter users link the most to other Twitter users? (Provide the top ten.)
-        static List<string> UsersThatLinkToMost()
+        static Dictionary<string, int> UsersThatLinkToMost()
         {
-            return new List<string>();
+            //db.tweets.aggregate(
+            //{$match: { text:/@\w +\/} },
+            //{$group: { _id: null,text: {$push: "$text"} }
+            //})
+
+            Dictionary<string, int> dictionary = new Dictionary<string, int>();
+
+            foreach (Dictionary<string, BsonValue> tweet in Tweets)
+            {
+                if (tweet["text"].AsString.Contains("@"))
+                {
+                    string username = tweet["user"].ToString();
+                    if (dictionary.ContainsKey(username))
+                    {
+                        dictionary[username] += 1;
+                    }
+                    else
+                    {
+                        dictionary[username] = 1;
+                    }
+                }
+            }
+
+            return dictionary.OrderByDescending(o => o.Value).Take(10).ToDictionary();
         }
     }
 }
