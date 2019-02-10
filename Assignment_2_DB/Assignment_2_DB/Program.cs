@@ -58,9 +58,10 @@ namespace Assignment_2_DB
 
                 if (input.StartsWith("help"))
                 {
-                    Console.WriteLine("Examples:");
+                    Console.WriteLine("Available commands:");
                     Console.WriteLine("total twitter users");
                     Console.WriteLine("users that link to most other users");
+                    Console.WriteLine("most active users");
                 }
 
                 if (input.ToLower() == "total twitter users")
