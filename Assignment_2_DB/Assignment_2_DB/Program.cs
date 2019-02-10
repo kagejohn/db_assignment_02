@@ -71,7 +71,7 @@ namespace Assignment_2_DB
                 {
                     foreach (KeyValuePair<string, int> keyValuePair in UsersThatLinkToMost())
                     {
-                        Console.WriteLine("Username: " + keyValuePair.Key + " ReTweets: " + keyValuePair.Value);
+                        Console.WriteLine("Username: " + keyValuePair.Key + " Links: " + keyValuePair.Value);
                     }
                 }
             }
