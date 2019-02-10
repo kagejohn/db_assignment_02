@@ -75,6 +75,14 @@ namespace Assignment_2_DB
                         Console.WriteLine("Username: " + keyValuePair.Key + " Links: " + keyValuePair.Value);
                     }
                 }
+
+                if (input.ToLower() == "most mentioned users")
+                {
+                    foreach (KeyValuePair<string, int> keyValuePair in MostMentionedUsers())
+                    {
+                        Console.WriteLine("Username: " + keyValuePair.Key + " Mentions: " + keyValuePair.Value);
+                    }
+                }
             }
         }
 
@@ -107,30 +115,61 @@ namespace Assignment_2_DB
         //Which Twitter users link the most to other Twitter users? (Provide the top ten.)
         static Dictionary<string, int> UsersThatLinkToMost()
         {
-            //db.tweets.aggregate(
-            //{$match: { text:/@\w +\/} },
-            //{$group: { _id: null,text: {$push: "$text"} }
-            //})
-
             Dictionary<string, int> dictionary = new Dictionary<string, int>();
 
             foreach (Dictionary<string, BsonValue> tweet in Tweets)
             {
                 if (tweet["text"].AsString.Contains("@"))
                 {
-                    string username = tweet["user"].ToString();
-                    if (dictionary.ContainsKey(username))
+                    List<string> textList = tweet["text"].AsString.Split(' ').ToList();
+                    int indexOfMention = textList.FindIndex(s => s.Contains("@"));
+
+                    if (textList[indexOfMention].Length > 1)
                     {
-                        dictionary[username] += 1;
-                    }
-                    else
-                    {
-                        dictionary[username] = 1;
+                        string username = tweet["user"].ToString();
+                        if (dictionary.ContainsKey(username))
+                        {
+                            dictionary[username] += 1;
+                        }
+                        else
+                        {
+                            dictionary[username] = 1;
+                        }
                     }
                 }
             }
 
             return dictionary.OrderByDescending(o => o.Value).Take(10).ToDictionary();
+        }
+
+        //Who is are the most mentioned Twitter users? (Provide the top five.)
+        static Dictionary<string, int> MostMentionedUsers()
+        {
+            Dictionary<string, int> dictionary = new Dictionary<string, int>();
+
+            foreach (Dictionary<string, BsonValue> tweet in Tweets)
+            {
+                if (tweet["text"].AsString.Contains("@"))
+                {
+                    List<string> textList = tweet["text"].AsString.Split(' ').ToList();
+                    int indexOfMention = textList.FindIndex(s => s.Contains("@"));
+
+                    if (textList[indexOfMention].Length > 1)
+                    {
+                        string mentionedUser = textList[indexOfMention].Substring(1, textList[indexOfMention].Length - 1);
+                        if (dictionary.ContainsKey(mentionedUser))
+                        {
+                            dictionary[mentionedUser] += 1;
+                        }
+                        else
+                        {
+                            dictionary[mentionedUser] = 1;
+                        }
+                    }
+                }
+            }
+
+            return dictionary.OrderByDescending(o => o.Value).Take(5).ToDictionary();
         }
     }
 }
