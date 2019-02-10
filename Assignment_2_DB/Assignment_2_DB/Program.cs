@@ -60,6 +60,7 @@ namespace Assignment_2_DB
                 {
                     Console.WriteLine("Examples:");
                     Console.WriteLine("total twitter users");
+                    Console.WriteLine("users that link to most other users");
                 }
 
                 if (input.ToLower() == "total twitter users")
