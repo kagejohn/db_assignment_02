@@ -43,6 +43,7 @@ namespace Assignment_2_DB
                     Console.WriteLine("Available commands:");
                     Console.WriteLine("total twitter users");
                     Console.WriteLine("users that link to most other users");
+                    Console.WriteLine("most mentioned users");
                     Console.WriteLine("most active users");
                     Console.WriteLine("most polarized users");
                 }
