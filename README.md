@@ -10,6 +10,7 @@ When you launch the program you get a command interface where you can execute a 
 3. users that link to most other users.
 4. most mentioned users.
 5. most active users.
+6. most polarized users.
 
 ## How to use it
 
@@ -87,6 +88,18 @@ If you are using Windows it is recommended to run the program with the [Git Bash
    ```bash
    $ most mentioned users
    ```
+      
+12. Who are the most active Twitter users (top ten)?
+
+   ```bash
+   $ most active users
+   ```
+      
+13. Who are the five most grumpy (most negative tweets) and the most happy (most positive tweets)?
+
+   ```bash
+   $ most polarized users
+   ```
 
 ### My systems responses to the following questions:
 1. How many Twitter users are in the database?
@@ -138,6 +151,17 @@ If you are using Windows it is recommended to run the program with the [Git Bash
 5. Who are the five most grumpy (most negative tweets) and the most happy (most positive tweets)?
   
    ```
-   TBD
+   Negative list:
+   Username: lost_dog Tweets: 549
+   Username: tweetpet Tweets: 310
+   Username: webwoke Tweets: 264
+   Username: mcraddictal Tweets: 210
+   Username: wowlew Tweets: 210
+   Positive list:
+   Username: what_bugs_u Tweets: 246
+   Username: DarkPiano Tweets: 231
+   Username: VioletsCRUK Tweets: 218
+   Username: tsarnick Tweets: 212
+   Username: keza34 Tweets: 211
    ```
    
