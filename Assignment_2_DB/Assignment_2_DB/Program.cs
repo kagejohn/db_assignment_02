@@ -50,17 +50,28 @@ namespace Assignment_2_DB
             await LoadCollection();
 
             Console.WriteLine("Input a command: ");
-            string input = Console.ReadLine();
-
-            if (input.StartsWith("help"))
+            while (true)
             {
-                Console.WriteLine("Examples:");
-                Console.WriteLine("total twitter users");
-            }
+                string input = Console.ReadLine();
 
-            if (input.ToLower() == "total twitter users")
-            {
-                Console.WriteLine(UniqueUsers());
+                if (input.StartsWith("help"))
+                {
+                    Console.WriteLine("Examples:");
+                    Console.WriteLine("total twitter users");
+                }
+
+                if (input.ToLower() == "total twitter users")
+                {
+                    Console.WriteLine(UniqueUsers());
+                }
+
+                //if (input.ToLower() == "users that link to most other users")
+                //{
+                //    foreach (string name in UsersThatLinkToMost())
+                //    {
+                //        Console.WriteLine("Username: " + name);
+                //    }
+                //}
             }
         }
 
@@ -84,9 +95,16 @@ namespace Assignment_2_DB
             }
         }
 
+        //How many Twitter users are in the database?
         static int UniqueUsers()
         {
             return Tweets.DistinctBy(t => t["id"]).Count();
+        }
+
+        //Which Twitter users link the most to other Twitter users? (Provide the top ten.)
+        static List<string> UsersThatLinkToMost()
+        {
+            return new List<string>();
         }
     }
 }
