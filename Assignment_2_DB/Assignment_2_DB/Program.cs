@@ -52,6 +52,12 @@ namespace Assignment_2_DB
             Console.WriteLine("Input a command: ");
             string input = Console.ReadLine();
 
+            if (input.StartsWith("help"))
+            {
+                Console.WriteLine("Examples:");
+                Console.WriteLine("total twitter users");
+            }
+
             if (input.ToLower() == "total twitter users")
             {
                 Console.WriteLine(UniqueUsers());
