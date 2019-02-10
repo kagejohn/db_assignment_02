@@ -30,24 +30,6 @@ namespace Assignment_2_DB
             _mongoDatabase = mongoClient.GetDatabase("social_net");
             _mongoCollection = _mongoDatabase.GetCollection<BsonDocument>("tweets");
 
-            //using (IAsyncCursor<BsonDocument> asyncCursor = await _mongoCollection.FindAsync(new BsonDocument()))
-            //{
-            //    int count = 0;
-
-            //    while (await asyncCursor.MoveNextAsync())
-            //    {
-            //        IEnumerable<BsonDocument> batch = asyncCursor.Current;
-            //        foreach (BsonDocument document in batch)
-            //        {
-            //            if (count < 10)
-            //            {
-            //                Console.WriteLine(document + "\n");
-            //            }
-            //            count++;
-            //        }
-            //    }
-            //}
-
             Console.WriteLine("Loading data plz wait...");
             await LoadCollection();
 
@@ -62,6 +44,7 @@ namespace Assignment_2_DB
                     Console.WriteLine("total twitter users");
                     Console.WriteLine("users that link to most other users");
                     Console.WriteLine("most active users");
+                    Console.WriteLine("most polarized users");
                 }
 
                 if (input.ToLower() == "total twitter users")
@@ -88,6 +71,23 @@ namespace Assignment_2_DB
                 if (input.ToLower() == "most active users")
                 {
                     foreach (KeyValuePair<string, int> keyValuePair in MostActiveUsers())
+                    {
+                        Console.WriteLine("Username: " + keyValuePair.Key + " Tweets: " + keyValuePair.Value);
+                    }
+                }
+
+                if (input.ToLower() == "most polarized users")
+                {
+                    List<Dictionary<string, int>> polarizedTweets = MostPolarizedTweets();
+
+                    Console.WriteLine("Negative list:");
+                    foreach (KeyValuePair<string, int> keyValuePair in polarizedTweets[0])
+                    {
+                        Console.WriteLine("Username: " + keyValuePair.Key + " Tweets: " + keyValuePair.Value);
+                    }
+
+                    Console.WriteLine("Positive list:");
+                    foreach (KeyValuePair<string, int> keyValuePair in polarizedTweets[1])
                     {
                         Console.WriteLine("Username: " + keyValuePair.Key + " Tweets: " + keyValuePair.Value);
                     }
@@ -200,6 +200,49 @@ namespace Assignment_2_DB
             }
 
             return dictionary.OrderByDescending(o => o.Value).Take(10).ToDictionary();
+        }
+
+        //Who are the five most grumpy (most negative tweets) and the most happy (most positive tweets)?
+        static List<Dictionary<string, int>> MostPolarizedTweets()
+        {
+            Dictionary<string, int> dictionaryNegative = new Dictionary<string, int>();
+            Dictionary<string, int> dictionaryPositive = new Dictionary<string, int>();
+
+            foreach (Dictionary<string, BsonValue> tweet in Tweets)
+            {
+                if (tweet["polarity"] == 0)
+                {
+                    string username = tweet["user"].ToString();
+                    if (dictionaryNegative.ContainsKey(username))
+                    {
+                        dictionaryNegative[username] += 1;
+                    }
+                    else
+                    {
+                        dictionaryNegative[username] = 1;
+                    }
+                }
+                else if (tweet["polarity"] == 4)
+                {
+                    string username = tweet["user"].ToString();
+                    if (dictionaryPositive.ContainsKey(username))
+                    {
+                        dictionaryPositive[username] += 1;
+                    }
+                    else
+                    {
+                        dictionaryPositive[username] = 1;
+                    }
+                }
+            }
+
+            List<Dictionary<string, int>> dictionaryList = new List<Dictionary<string, int>>
+            {
+                dictionaryNegative.OrderByDescending(o => o.Value).Take(5).ToDictionary(),
+                dictionaryPositive.OrderByDescending(o => o.Value).Take(5).ToDictionary()
+            };
+
+            return dictionaryList;
         }
     }
 }
