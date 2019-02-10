@@ -14,6 +14,8 @@ When you launch the program you get a command interface where you can execute a 
 
 You need to have the .NET Core SDK installed on your machine in order to run this project that can be done from [here](https://dotnet.microsoft.com/download).
 
+You need to have Docker installed on your machine in order to collect the data needed for the project to run that can be done from [here](https://www.docker.com/products/docker-desktop).
+
 If you are using Windows it is recommended to run the program with the [Git Bash](https://git-scm.com/downloads) terminal or any other Linux-based terminal.
 
 ### Windows/Linux/Mac
