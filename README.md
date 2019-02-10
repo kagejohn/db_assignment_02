@@ -9,6 +9,7 @@ When you launch the program you get a command interface where you can execute a 
 2. total twitter users.
 3. users that link to most other users.
 4. most mentioned users.
+5. most active users.
 
 ## How to use it
 
@@ -122,7 +123,16 @@ If you are using Windows it is recommended to run the program with the [Git Bash
 4. Who are the most active Twitter users (top ten)?
   
    ```
-   TBD
+   Username: lost_dog Tweets: 549
+   Username: webwoke Tweets: 345
+   Username: tweetpet Tweets: 310
+   Username: SallytheShizzle Tweets: 281
+   Username: VioletsCRUK Tweets: 279
+   Username: mcraddictal Tweets: 276
+   Username: tsarnick Tweets: 248
+   Username: what_bugs_u Tweets: 246
+   Username: Karen230683 Tweets: 238
+   Username: DarkPiano Tweets: 236
    ```
    
 5. Who are the five most grumpy (most negative tweets) and the most happy (most positive tweets)?
