@@ -72,3 +72,36 @@ If you are using Windows it is recommended to run the program with the [Git Bash
    ```bash
    $ total twitter users
    ```
+
+
+### My systems responses to the following questions:
+1. How many Twitter users are in the database?
+
+   ```
+   1598315
+   ```
+   
+2. Which Twitter users link the most to other Twitter users? (Provide the top ten.)
+  
+   ```
+   TBD
+   ```
+    
+3. Who is are the most mentioned Twitter users? (Provide the top five.)
+  
+   ```
+   TBD
+   ```
+   
+4. Who are the most active Twitter users (top ten)?
+  
+   ```
+   TBD
+   ```
+   
+5. Who are the five most grumpy (most negative tweets) and the most happy (most positive tweets)?
+  
+   ```
+   TBD
+   ```
+   
