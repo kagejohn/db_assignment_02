@@ -83,6 +83,14 @@ namespace Assignment_2_DB
                         Console.WriteLine("Username: " + keyValuePair.Key + " Mentions: " + keyValuePair.Value);
                     }
                 }
+
+                if (input.ToLower() == "most active users")
+                {
+                    foreach (KeyValuePair<string, int> keyValuePair in MostActiveUsers())
+                    {
+                        Console.WriteLine("Username: " + keyValuePair.Key + " Tweets: " + keyValuePair.Value);
+                    }
+                }
             }
         }
 
@@ -170,6 +178,27 @@ namespace Assignment_2_DB
             }
 
             return dictionary.OrderByDescending(o => o.Value).Take(5).ToDictionary();
+        }
+
+        //Who are the most active Twitter users (top ten)?
+        static Dictionary<string, int> MostActiveUsers()
+        {
+            Dictionary<string, int> dictionary = new Dictionary<string, int>();
+
+            foreach (Dictionary<string, BsonValue> tweet in Tweets)
+            {
+                string username = tweet["user"].ToString();
+                if (dictionary.ContainsKey(username))
+                {
+                    dictionary[username] += 1;
+                }
+                else
+                {
+                    dictionary[username] = 1;
+                }
+            }
+
+            return dictionary.OrderByDescending(o => o.Value).Take(10).ToDictionary();
         }
     }
 }
